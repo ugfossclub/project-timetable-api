@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\account;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AccountController extends Controller
 {
@@ -14,72 +15,50 @@ class AccountController extends Controller
      */
     public function index()
     {
-        //
+        return Account::all();
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+ 
+    public function show($id)
     {
-        //
+        return Account::find($id);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        return Account::create($request->validate([
+            'ugId' => ['ugId'],
+            'fName' => ['fName'],
+            'lName' => ['lName'],
+            'faculty' => ['faculty'],
+            'password' => Hash::make(['password']),
+            'department' => ['department'],
+            'programme' => ['programme'],
+            'active' => 'true',
+        ]));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\account  $account
-     * @return \Illuminate\Http\Response
-     */
-    public function show(account $account)
+    public function update(Request $request, $id)
     {
-        //
+        $account = Account::findOrFail($id);
+        $account->update($request->validate([
+            'ugId' => ['ugId'],
+            'fName' => ['fName'],
+            'lName' => ['lName'],
+            'faculty' => ['faculty'],
+            'department' => ['department'],
+            'programme' => ['programme'],
+        ]));
+
+        return $account;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\account  $account
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(account $account)
+    public function delete(Request $request, $id)
     {
-        //
-    }
+        $account = Account::findOrFail($id);
+        $account->update($request->validate()([
+            'active' => 'false' 
+        ]));
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\account  $account
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, account $account)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\account  $account
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(account $account)
-    {
-        //
+        return 204;
     }
 }
