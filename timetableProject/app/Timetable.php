@@ -12,6 +12,6 @@ class Timetable extends Model
 
 public function accounts() 
   {
-    return $this->belongsTo('App\Accounts');
+    return $this->belongsTo('App\Account');
   }
 }
