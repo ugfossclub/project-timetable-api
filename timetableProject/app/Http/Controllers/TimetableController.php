@@ -22,7 +22,7 @@ class TimetableController extends Controller
 
     public function store(Request $request)
     {
-        return Account::create($request->validate([
+        return Timetable::create($request->validate([
             'aid' => ['aid'],
             'room' => ['room'],
             'course' => ['course'],
@@ -35,28 +35,22 @@ class TimetableController extends Controller
     }
     public function update(Request $request, $id)
     {
-        $account = Account::findOrFail($id);
-        $account->update($request->validate([
-            'ugId' => ['ugId'],
-            'fName' => ['fName'],
-            'lName' => ['lName'],
-            'faculty' => ['faculty'],
-            'department' => ['department'],
-            'programme' => ['programme'],
+        $timetable = Timetable::findOrFail($id);
+        $timetable->update($request->validate([
+            'aid' => ['aid'],
+            'room' => ['room'],
+            'course' => ['course'],
+            'day' => ['day'],
+            'time' => ['time'],
         ]));
 
-        return $account;
+        return $Timetable;
     }
-    public function delete( $account = Account::findOrFail($id);
-        $account->update($request->validate()([
-            'active' => 'false' 
-        ]));
-
-        return 204;)
+    public function delete(Request $request, $id)
     {
-        $account = Account::findOrFail($id);
-        $account->update($request->validate()([
-            'active' => 'false'
+        $timetable = Timetable::findOrFail($id);
+        $timetable->update($request->validate([
+            'active' => 'false' 
         ]));
 
         return 204;
@@ -64,6 +58,6 @@ class TimetableController extends Controller
 
     public function show($id)
     {
-        return Account::find($id);
+        return Timetable::find($id);
     }
 }
