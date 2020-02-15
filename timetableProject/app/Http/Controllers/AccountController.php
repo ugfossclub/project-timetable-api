@@ -20,7 +20,8 @@ class AccountController extends Controller
  
     public function show($id)
     {
-        return Account::find($id);
+        $account = Account::find($id);
+        return response()->json($account, 200);
     }
 
     public function store(Request $request)

@@ -17,11 +17,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('account', 'AccountController@index');
-Route::get('account/{id}', 'AccountController@show');
-Route::post('account', 'AccountController@store');
-Route::put('account/{id}', 'AccountController@update');
-Route::delete('account/{id}', 'AccountController@delete');
+Route::middleware('auth:api')->get('/owen', function (Request $request) {
+    return "sdfljsdf";
+});
+
+Route::get('/accounts', 'AccountController@index');
+Route::get('accounts/{id}', 'AccountController@show');
+Route::post('accounts', 'AccountController@store');
+Route::put('accounts/{id}', 'AccountController@update');
+Route::delete('accounts/{id}', 'AccountController@delete');
 Route::get('timetable', 'TimetableController@index');
 Route::get('timetable/{id}', 'TimetableController@show');
 Route::post('timetable', 'TimetableController@store');
