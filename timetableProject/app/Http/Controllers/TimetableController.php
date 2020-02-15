@@ -11,9 +11,7 @@ class TimetableController extends Controller
 
     public function index(Timetable $timetable)
     {
-
-        $timetable=App\Timetable::all();
-        dd($timetable);
+        return Account::all();
     }
 
     public function create()
@@ -22,30 +20,50 @@ class TimetableController extends Controller
     }
 
 
-    public function store()
+    public function store(Request $request)
     {
-
-        $request = new Timetable();
-        $request->room=request('');
-        $request->course = request('');
-        $request->day = request('');
-        $request->time= request('');
-        $request->save()
+        return Account::create($request->validate([
+            'aid' => ['aid'],
+            'room' => ['room'],
+            'course' => ['course'],
+            'day' => ['day'],
+            'time' => ['time'],
+        ]));
         
 
 
     }
-    public function update()
+    public function update(Request $request, $id)
     {
+        $account = Account::findOrFail($id);
+        $account->update($request->validate([
+            'ugId' => ['ugId'],
+            'fName' => ['fName'],
+            'lName' => ['lName'],
+            'faculty' => ['faculty'],
+            'department' => ['department'],
+            'programme' => ['programme'],
+        ]));
 
+        return $account;
     }
-    public function delete()
-    {
+    public function delete( $account = Account::findOrFail($id);
+        $account->update($request->validate()([
+            'active' => 'false' 
+        ]));
 
+        return 204;)
+    {
+        $account = Account::findOrFail($id);
+        $account->update($request->validate()([
+            'active' => 'false'
+        ]));
+
+        return 204;
     }
 
-    public function show()
+    public function show($id)
     {
-
+        return Account::find($id);
     }
 }
