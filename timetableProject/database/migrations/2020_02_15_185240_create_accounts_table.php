@@ -22,6 +22,7 @@ class CreateAccountsTable extends Migration
             $table->string('password');
             $table->string('department');
             $table->string('programme');
+            $table->boolean('active');
             $table->timestamps();
         });
     }
