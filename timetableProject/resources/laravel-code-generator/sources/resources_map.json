@@ -1,0 +1,7 @@
+[
+    {
+        "model-name": "Timetable",
+        "resource-file": "timetables.json",
+        "table-name": "timetables"
+    }
+]
