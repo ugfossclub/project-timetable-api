@@ -10,8 +10,8 @@ class Timetable extends Model
       'aid', 'room', 'course', 'day', 'time'
   ];
 
-public function accounts() 
+public function accounts()
   {
-    return $this->belongsTo('App\Account');
+    return $this->belongsTo('App\Account', 'aid', 'id');
   }
 }

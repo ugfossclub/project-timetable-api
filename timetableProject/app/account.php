@@ -10,8 +10,8 @@ class Account extends Model
         'ugId','fName', 'lName', 'faculty', 'password', 'department', 'programme', 'active'
     ];
 
-    public function accounts()
+    public function timetable()
     {
-        return $this->hasOne('App\Timetable');
+        return $this->hasOne('App\Timetable', 'aid', 'id');
     }
 }

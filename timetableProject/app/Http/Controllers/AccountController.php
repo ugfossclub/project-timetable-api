@@ -17,7 +17,8 @@ class AccountController extends Controller
     {
         return Account::all();
     }
- 
+
+
     public function show($id)
     {
         $account = Account::find($id);
@@ -26,39 +27,22 @@ class AccountController extends Controller
 
     public function store(Request $request)
     {
-        return Account::create($request->validate([
-            'ugId' => ['ugId'],
-            'fName' => ['fName'],
-            'lName' => ['lName'],
-            'faculty' => ['faculty'],
-            'password' => Hash::make(['password']),
-            'department' => ['department'],
-            'programme' => ['programme'],
-            'active' => 'true',
-        ]));
+        return Account::create($request->only('ugId', 'fName', 'lName', 'faculty', 'password', 'department', 'programme', 'active'));
     }
 
     public function update(Request $request, $id)
     {
         $account = Account::findOrFail($id);
-        $account->update($request->validate([
-            'ugId' => ['ugId'],
-            'fName' => ['fName'],
-            'lName' => ['lName'],
-            'faculty' => ['faculty'],
-            'department' => ['department'],
-            'programme' => ['programme'],
-        ]));
-
+        $account->update($request->only('ugId', 'fName', 'lName', 'faculty', 'password', 'department', 'programme'));
         return $account;
     }
 
     public function delete(Request $request, $id)
     {
         $account = Account::findOrFail($id);
-        $account->update($request->validate()([
-            'active' => 'false' 
-        ]));
+        $account->update([
+            'active' => '0'
+        ]);
 
         return 204;
     }
