@@ -11,7 +11,7 @@ class TimetableController extends Controller
 
     public function index(Timetable $timetable)
     {
-        return Account::all();
+        return Timetable::all();
     }
 
     public function create()
@@ -29,7 +29,7 @@ class TimetableController extends Controller
             'day' => ['day'],
             'time' => ['time'],
         ]));
-        
+
 
 
     }
@@ -49,9 +49,9 @@ class TimetableController extends Controller
     public function delete(Request $request, $id)
     {
         $timetable = Timetable::findOrFail($id);
-        $timetable->update($request->validate([
-            'active' => 'false' 
-        ]));
+        $timetable->update([
+            'active' => '0'
+        ]);
 
         return 204;
     }
